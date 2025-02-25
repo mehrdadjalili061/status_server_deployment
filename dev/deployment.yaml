@@ -18,7 +18,7 @@ spec:
         - name: facegram-registery
       containers:
         - name: status-api-server
-          image: ""
+          image: cr.fcgm.dev/facegram/status-service:82cb95bc
           ports:
             - containerPort: 8080
             - containerPort: 30021
