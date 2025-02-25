@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: status-api-server
+  labels:
+    app: status-api-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: status-api-server
+  template:
+    metadata:
+      labels:
+        app: status-api-server
+    spec:
+      imagePullSecrets:
+        - name: facegram-registery
+      containers:
+        - name: status-api-server
+          image: ""
+          ports:
+            - containerPort: 8080
+            - containerPort: 30021
+          env:
+            - name: NODE_ENV
+              value: "dev"   
+          envFrom:
+            - secretRef:
+                name: grpc-client-configs
+            - secretRef:
+                name: grpc-client-urls
+            - secretRef:
+                name: sentry-credential
+            - secretRef:
+                name: mongodb-credential  
+            - secretRef:
+                name: redis-credential                                              
